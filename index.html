@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Словобой</title>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+  </head>
+  <body>
+    <main>
+      <div class="player-one-side" data-js-player-one-side></div>
+      <span class="word visualy-hidden" data-js-word ></span>
+      <div class="player-two-side" data-js-player-two-side></div>
+    </main>
+    <div class="menu-overlay" data-js-menu-overlay>
+      <div class="menu">
+        <h1 class="menu-logo">Словобой</h1>
+        <p class="menu-rules">Цель: Заполнить свою половину экрана словами по теме.</p>
+        <p class="menu-rules">Как играть: Называйте слова по теме, кликайте и захватывайте поле. Чья половина экрана первой заполнится - тот победил.</p>
+        <div class="menu-input">
+          <input type="text" class="menu-input-player-name" data-js-player-one-name placeholder="Введите имя первого игрока" value="Игрок 1">
+          <input type="text" class="menu-input-player-name" data-js-player-two-name placeholder="Введите имя второго игрока" value="Игрок 2">
+        </div>
+        <button class="menu-start-button" data-js-start-button>Начать игру</button>
+      </div>
+    </div>
+    <div class="restart-overlay restart-hidden" data-js-restart-overlay>
+      <span class="restart-winner" data-js-restart-winner></span>
+        <p class="restart-player-score" data-js-player-one-score></p>
+        <p class="restart-player-score" data-js-player-two-score></p>
+        <button class="restart-button" data-js-restart-button>Начать заново</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

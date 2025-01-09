@@ -1,0 +1,153 @@
+@import 'https://unpkg.com/@a1rth/css-normalize@1.1.3/index.css';
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root{
+  --height-player-one: 50%;
+  --height-player-two: 50%
+}
+
+body{
+  font-family: "Shantell Sans", serif;
+  color: yellow;
+}
+
+main{
+  position: relative;
+  height: 100vh;
+}
+
+  .player-one-side{
+  height: var(--height-player-one);
+  background-color: #3db2ff;
+  position: relative;
+  transition: height 0.3s ease;
+}
+
+.player-two-side{
+  height: var(--height-player-two);
+  background-color: #ff2442;
+  transition: height 0.3s ease;
+}
+
+.word{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -55%);
+  text-align: center;
+  width: 80%;
+}
+
+.word-box-count{
+  display: flex;
+  flex-direction: column;
+}
+
+.word{
+  font-size: clamp(28px, 3.33vw ,64px);
+}
+
+.word-box-player-count{
+  font-size: clamp(24px, 2.5vw ,48px);
+}
+
+.word-box-restart-button{
+  font-size: clamp(30px, 2.813vw ,54px);
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: yellow;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  transition: opacity 0.3s ease;
+}
+
+.menu-overlay-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu {
+  text-align: center;
+}
+
+.menu-logo {
+  font-size: clamp(32px, 3.33vw ,64px);
+}
+
+.menu-rules {
+  color: #d3d3d3;
+  font-size: clamp(16px, 1.25vw ,24px);
+}
+
+.menu-start-button {
+  font-size: clamp(20px, 1.458vw ,28px);
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: yellow;
+}
+
+.menu-input{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+  margin-block: 10px;
+}
+
+.menu-input-player-name{
+  outline: none;
+  width: clamp(205px, 70% ,300px);
+}
+
+.restart-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: opacity 0.3s ease;
+}
+
+.restart-hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.restart-winner{
+  font-size: clamp(32px, 3.33vw ,64px);
+}
+
+.restart-player-score{
+  font-size: clamp(16px, 1.25vw ,24px);
+}
+
+.restart-button{
+  font-size: clamp(20px, 1.458vw ,28px);
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: yellow;
+}
+
