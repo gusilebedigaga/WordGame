@@ -2,7 +2,6 @@ class WordGame{
     selectors = {
         playerOneName: '[data-js-player-one-name]',
         playerTwoName: '[data-js-player-two-name]',
-        wordBox: '[data-js-word-box]',
         word: '[data-js-word]',
         playerOneSide: '[data-js-player-one-side]',
         playerTwoSide: '[data-js-player-two-side]',
@@ -31,7 +30,6 @@ class WordGame{
     }
 
     constructor() {
-        this.wordBoxElement = document.querySelector(this.selectors.wordBox)
         this.wordElement = document.querySelector(this.selectors.word)
         this.playerOneNameElement = document.querySelector(this.selectors.playerOneName)
         this.playerTwoNameElement = document.querySelector(this.selectors.playerTwoName)
