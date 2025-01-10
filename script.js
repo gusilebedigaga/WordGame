@@ -9,10 +9,10 @@ class WordGame{
         menuOverlay: '[data-js-menu-overlay]',
         startButton: '[data-js-start-button]',
         restartOverlay: '[data-js-restart-overlay]',
-        winner: '[data-js-restart-winner]',
+        winnerTitle: '[data-js-restart-title]',
         playerOneScore: '[data-js-player-one-score]',
         playerTwoScore: '[data-js-player-two-score]',
-        restartButton: '[data-js-restart-button]'
+        restartButton: '[data-js-restart-button]',
     }
 
     initialState = {
@@ -20,14 +20,14 @@ class WordGame{
         playerTwoTurn: false,
         playerOneHeight: 50,
         playerTwoHeight: 50,
-        gameStarted: false
+        gameStarted: false,
     }
 
     gameInfo = {
         playerOneName: 'Игрок 1',
         playerTwoName: 'Игрок 2',
         playerOneScore: 0,
-        playerTwoScore: 0
+        playerTwoScore: 0,
     }
 
     constructor() {
@@ -40,11 +40,11 @@ class WordGame{
         this.menuOverlayElement = document.querySelector(this.selectors.menuOverlay)
         this.startButtonElement = document.querySelector(this.selectors.startButton)
         this.restartOverlayElement = document.querySelector(this.selectors.restartOverlay)
-        this.winnerElement = document.querySelector(this.selectors.winner)
+        this.winnerTitleElement = document.querySelector(this.selectors.winnerTitle)
         this.playerOneScoreElement = document.querySelector(this.selectors.playerOneScore)
         this.playerTwoScoreElement = document.querySelector(this.selectors.playerTwoScore)
         this.restartButtonElement = document.querySelector(this.selectors.restartButton)
-        this.wordElement.style.opacity = 0
+        this.checkWordOpacity()
         this.state = {...this.initialState}
         this.themes = JSON.parse(localStorage.getItem('themes'))
         if(!this.themes) {
@@ -89,6 +89,14 @@ class WordGame{
         }
     }
 
+    checkWordOpacity() {
+        if(this.menuOverlayElement.classList.contains('hidden') && this.restartOverlayElement.classList.contains('hidden')){
+            this.wordElement.classList.remove('hidden')
+        }else{
+            this.wordElement.classList.add('hidden')
+        }
+    }
+
     updatePlayersSizes = () => {
         if (this.state.playerOneTurn) {
             this.state.playerOneHeight = Math.min(this.state.playerOneHeight + 5, 100)
@@ -102,29 +110,37 @@ class WordGame{
         const root = document.documentElement;
         root.style.setProperty('--height-player-one', `${this.state.playerOneHeight}%`)
         root.style.setProperty('--height-player-two', `${this.state.playerTwoHeight}%`)
-        
+        this.checkWinner()
+    }
+
+    checkWinner() {
         if (this.state.playerOneHeight === 100 || this.state.playerTwoHeight === 100) {
             clearInterval(this.intervalId)
+            this.restartOverlayElement.classList.remove('hidden')
+            this.checkWordOpacity()
             document.removeEventListener("click", this.onClick)
             document.removeEventListener("keydown", this.onKeyDown)
-            this.wordElement.style.opacity = 0
-            this.restartOverlayElement.classList.remove('restart-hidden')
                                      
             if(this.state.playerOneHeight === 100 ){
                 this.gameInfo.playerOneScore++
-                this.winnerElement.textContent = `Победитель ${this.gameInfo.playerOneName}`
+                this.winnerTitleElement.textContent = `Победитель ${this.gameInfo.playerOneName}`
             }
             else if (this.state.playerTwoHeight === 100 ){
                 this.gameInfo.playerTwoScore++
-                this.winnerElement.textContent = `Победитель ${this.gameInfo.playerTwoName}`
+                this.winnerTitleElement.textContent = `Победитель ${this.gameInfo.playerTwoName}`
             }
             
             this.playerOneScoreElement.textContent = `${this.gameInfo.playerOneName}: ${this.gameInfo.playerOneScore}`
             this.playerTwoScoreElement.textContent = `${this.gameInfo.playerTwoName}: ${this.gameInfo.playerTwoScore}`
         }
     }
+    
+    getPlayersNames() {
+        this.gameInfo.playerOneName = this.playerOneNameElement.value
+        this.gameInfo.playerTwoName = this.playerTwoNameElement.value
+    }
 
-    switchTurn = () => {
+    switchTurn() {
         if (!this.state.gameStarted) {
             this.state.gameStarted = true
             this.state.playerOneTurn = true
@@ -137,11 +153,11 @@ class WordGame{
         }
     }
 
+
     onStartGame = () => {
-        this.menuOverlayElement.classList.add('menu-overlay-hidden');
-        this.wordElement.style.opacity = 1
-        this.gameInfo.playerOneName = this.playerOneNameElement.value
-        this.gameInfo.playerTwoName = this.playerTwoNameElement.value
+        this.menuOverlayElement.classList.add('hidden');
+        this.checkWordOpacity()
+        this.getPlayersNames()
         document.activeElement.blur()
     }
     
@@ -152,7 +168,7 @@ class WordGame{
     }
 
     onKeyDown = () => {
-        if(this.menuOverlayElement.classList.contains('menu-overlay-hidden')){
+        if(this.menuOverlayElement.classList.contains('hidden') && this.restartOverlayElement.classList.contains('hidden')){
             this.switchTurn()
         }
     }
@@ -160,8 +176,8 @@ class WordGame{
     onRestart = () => {
         clearInterval(this.intervalId)
         this.state = {...this.initialState}
-        this.restartOverlayElement.classList.add('restart-hidden');
-        this.wordElement.style.opacity = 1
+        this.restartOverlayElement.classList.add('hidden');
+        this.checkWordOpacity()
         this.updatePlayersSizes();
         this.setRandomTheme()
         document.addEventListener("click", this.onClick)
