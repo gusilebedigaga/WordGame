@@ -16,7 +16,7 @@ main{
   height: 100vh;
 }
 
-  .player-one-side{
+.player-one-side{
   height: var(--height-player-one);
   background-color: #3db2ff;
   position: relative;
@@ -35,31 +35,11 @@ main{
   top: 50%;
   transform: translate(-50%, -55%);
   text-align: center;
+  font-size: clamp(28px, 3.33vw ,64px);
   width: 80%;
 }
 
-.word-box-count{
-  display: flex;
-  flex-direction: column;
-}
-
-.word{
-  font-size: clamp(28px, 3.33vw ,64px);
-}
-
-.word-box-player-count{
-  font-size: clamp(24px, 2.5vw ,48px);
-}
-
-.word-box-restart-button{
-  font-size: clamp(30px, 2.813vw ,54px);
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  color: yellow;
-}
-
-.menu-overlay {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -68,31 +48,39 @@ main{
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 100;
   transition: opacity 0.3s ease;
+  text-align: center;
 }
 
-.menu-overlay-hidden {
+.menu-overlay {
+  z-index: 100;
+}
+
+.restart-overlay{
+  z-index: 50;
+}
+
+.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.menu {
-  text-align: center;
-}
-
-.menu-logo {
+.overlay-title {
   font-size: clamp(32px, 3.33vw ,64px);
 }
 
-.menu-rules {
-  color: #d3d3d3;
+.overlay-text {
   font-size: clamp(16px, 1.25vw ,24px);
 }
 
-.menu-start-button {
+.menu-rules{
+  color: #d3d3d3;
+}
+
+.button {
   font-size: clamp(20px, 1.458vw ,28px);
   cursor: pointer;
   border: none;
@@ -113,41 +101,3 @@ main{
   outline: none;
   width: clamp(205px, 70% ,300px);
 }
-
-.restart-overlay{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  padding: 30px;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-  transition: opacity 0.3s ease;
-}
-
-.restart-hidden{
-  opacity: 0;
-  pointer-events: none;
-}
-
-.restart-winner{
-  font-size: clamp(32px, 3.33vw ,64px);
-}
-
-.restart-player-score{
-  font-size: clamp(16px, 1.25vw ,24px);
-}
-
-.restart-button{
-  font-size: clamp(20px, 1.458vw ,28px);
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  color: yellow;
-}
-
